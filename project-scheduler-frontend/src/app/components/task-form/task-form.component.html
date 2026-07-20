@@ -1,0 +1,128 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{ mode === 'create' ? 'Create New Task' : 'Edit Task' }}
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <!-- Task Name -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Task Name</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          placeholder="Enter task name"
+          required
+        />
+        <mat-error *ngIf="hasError('name')">
+          {{ getErrorMessage('name') }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Project Selection -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Project</mat-label>
+        <mat-select formControlName="projectId" required>
+          <mat-option *ngFor="let project of projects" [value]="project.id">
+            {{ project.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('projectId')">
+          Project is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Days Required -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Days Required</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="daysRequired"
+          placeholder="Enter number of days"
+          min="1"
+          max="365"
+          required
+        />
+        <mat-error *ngIf="hasError('daysRequired')">
+          {{ getErrorMessage('daysRequired') }}
+        </mat-error>
+        <mat-hint>Number of days to complete this task (1-365)</mat-hint>
+      </mat-form-field>
+
+      <!-- Story Points (Fibonacci) -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Story Points</mat-label>
+        <mat-select formControlName="storyPoints" required>
+          <mat-option *ngFor="let points of storyPoints" [value]="points">
+            {{ points }} {{ points === 1 ? 'point' : 'points' }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('storyPoints')">
+          Story points are required
+        </mat-error>
+        <mat-hint>Fibonacci sequence: 1, 2, 3, 5, 8, 13, 21, 34, 55, 89</mat-hint>
+      </mat-form-field>
+
+      <!-- Dependencies -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Dependencies</mat-label>
+        <mat-select
+          formControlName="dependencies"
+          multiple
+          (selectionChange)="onDependencyChange($event.value)"
+        >
+          <mat-option *ngFor="let task of availableTasks" [value]="task.id">
+            {{ task.name }}
+          </mat-option>
+        </mat-select>
+        <mat-hint>
+          Select tasks that must be completed before this task
+          <span *ngIf="validatingDependencies" class="validating">
+            (Validating...)
+          </span>
+        </mat-hint>
+      </mat-form-field>
+
+      <!-- Selected Dependencies Display -->
+      <div *ngIf="selectedDependencies.length > 0" class="dependencies-chips">
+        <mat-chip-set>
+          <mat-chip *ngFor="let depId of selectedDependencies">
+            {{ getTaskName(depId) }}
+            <button matChipRemove (click)="removeDependency(depId)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+        </mat-chip-set>
+      </div>
+
+      <!-- Circular Dependency Warning -->
+      <div *ngIf="validatingDependencies" class="warning-message">
+        <mat-icon>info</mat-icon>
+        <span>Checking for circular dependencies...</span>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="button-row">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="loading || taskForm.invalid || validatingDependencies"
+        >
+          {{ loading ? 'Saving...' : (mode === 'create' ? 'Create Task' : 'Update Task') }}
+        </button>
+        <button
+          mat-button
+          type="button"
+          (click)="onCancel()"
+          [disabled]="loading"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

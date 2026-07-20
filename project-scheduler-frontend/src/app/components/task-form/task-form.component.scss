@@ -1,0 +1,95 @@
+mat-card {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+
+mat-form-field {
+  display: block;
+}
+
+.dependencies-chips {
+  margin-bottom: 16px;
+  
+  mat-chip-set {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  mat-chip {
+    background-color: #e3f2fd;
+    color: #1976d2;
+  }
+}
+
+.warning-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  background-color: #fff3e0;
+  border-left: 4px solid #ff9800;
+  border-radius: 4px;
+
+  mat-icon {
+    color: #ff9800;
+  }
+
+  span {
+    color: #e65100;
+    font-size: 14px;
+  }
+}
+
+.validating {
+  color: #ff9800;
+  font-style: italic;
+  margin-left: 8px;
+}
+
+// Snackbar styles
+::ng-deep {
+  .snackbar-success {
+    background-color: #4caf50;
+    color: white;
+  }
+
+  .snackbar-error {
+    background-color: #f44336;
+    color: white;
+  }
+
+  .snackbar-warning {
+    background-color: #ff9800;
+    color: white;
+  }
+}
+
+// Story points hint styling
+mat-hint {
+  font-size: 12px;
+  color: #666;
+}
+
+// Number input styling
+input[type="number"] {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    opacity: 1;
+  }
+}
+
+// Made with Bob

@@ -1,0 +1,130 @@
+.app-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  .toolbar-icon {
+    margin-right: 12px;
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+  
+  .toolbar-title {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .toolbar-subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+    font-weight: 300;
+  }
+}
+
+.app-container {
+  margin-top: 64px;
+  min-height: calc(100vh - 64px - 50px);
+  background: #f5f5f5;
+  
+  .main-tabs {
+    background: white;
+    
+    ::ng-deep .mat-mdc-tab-labels {
+      background: #fafafa;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    ::ng-deep .mat-mdc-tab-label {
+      min-width: 160px;
+      height: 56px;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      
+      &.mdc-tab--active {
+        color: #1976d2;
+      }
+    }
+    
+    ::ng-deep .mat-mdc-tab-body-content {
+      overflow: visible;
+    }
+  }
+  
+  .tab-content {
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+.app-footer {
+  background: #263238;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 13px;
+  
+  p {
+    margin: 0;
+    opacity: 0.9;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .app-toolbar {
+    .toolbar-subtitle {
+      display: none;
+    }
+    
+    .toolbar-title {
+      font-size: 18px;
+    }
+  }
+  
+  .app-container {
+    .tab-content {
+      padding: 16px;
+    }
+    
+    .main-tabs {
+      ::ng-deep .mat-mdc-tab-label {
+        min-width: 100px;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .app-toolbar {
+    .toolbar-icon {
+      margin-right: 8px;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+    
+    .toolbar-title {
+      font-size: 16px;
+    }
+  }
+  
+  .app-container {
+    .tab-content {
+      padding: 12px;
+    }
+  }
+}
+
+// Made with Bob

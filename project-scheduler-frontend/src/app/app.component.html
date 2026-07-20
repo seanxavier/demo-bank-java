@@ -1,0 +1,38 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <mat-icon class="toolbar-icon">schedule</mat-icon>
+  <span class="toolbar-title">{{ title }}</span>
+  <span class="spacer"></span>
+  <span class="toolbar-subtitle">ASAP Scheduling System</span>
+</mat-toolbar>
+
+<div class="app-container">
+  <mat-tab-group animationDuration="300ms" class="main-tabs">
+    <mat-tab label="Projects">
+      <ng-template matTabContent>
+        <div class="tab-content">
+          <app-project-form></app-project-form>
+        </div>
+      </ng-template>
+    </mat-tab>
+    
+    <mat-tab label="Tasks">
+      <ng-template matTabContent>
+        <div class="tab-content">
+          <app-task-form></app-task-form>
+        </div>
+      </ng-template>
+    </mat-tab>
+    
+    <mat-tab label="Schedule">
+      <ng-template matTabContent>
+        <div class="tab-content">
+          <app-schedule-view></app-schedule-view>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<footer class="app-footer">
+  <p>Project Scheduler v1.0 | Built with Angular 19+ & Spring Boot</p>
+</footer>

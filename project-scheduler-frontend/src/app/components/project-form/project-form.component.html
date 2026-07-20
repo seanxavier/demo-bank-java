@@ -1,0 +1,82 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{ mode === 'create' ? 'Create New Project' : 'Edit Project' }}
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+      <!-- Project Name -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Project Name</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          placeholder="Enter project name"
+          (blur)="checkNameExists()"
+          required
+        />
+        <mat-error *ngIf="hasError('name')">
+          {{ getErrorMessage('name') }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Start Date -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Start Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="startDate"
+          [min]="minDate"
+          placeholder="Select start date"
+          required
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="hasError('startDate')">
+          {{ getErrorMessage('startDate') }}
+        </mat-error>
+        <mat-hint>Project cannot start in the past</mat-hint>
+      </mat-form-field>
+
+      <!-- Description -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          placeholder="Enter project description (optional)"
+          rows="4"
+        ></textarea>
+        <mat-error *ngIf="hasError('description')">
+          {{ getErrorMessage('description') }}
+        </mat-error>
+        <mat-hint align="end">
+          {{ projectForm.get('description')?.value?.length || 0 }}/500
+        </mat-hint>
+      </mat-form-field>
+
+      <!-- Action Buttons -->
+      <div class="button-row">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="loading || projectForm.invalid"
+        >
+          {{ loading ? 'Saving...' : (mode === 'create' ? 'Create Project' : 'Update Project') }}
+        </button>
+        <button
+          mat-button
+          type="button"
+          (click)="onCancel()"
+          [disabled]="loading"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,40 @@
+mat-card {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+
+mat-form-field {
+  display: block;
+}
+
+// Snackbar styles
+::ng-deep {
+  .snackbar-success {
+    background-color: #4caf50;
+    color: white;
+  }
+
+  .snackbar-error {
+    background-color: #f44336;
+    color: white;
+  }
+
+  .snackbar-warning {
+    background-color: #ff9800;
+    color: white;
+  }
+}
+
+// Made with Bob
