@@ -163,7 +163,7 @@ Create schedule viewer with:
 ## 📁 Complete File Structure
 
 ```
-demo-bpi/
+demo-banking-java/
 ├── project-scheduler-backend/ (100% ✅)
 │   └── [32 files, ~3,200 lines]
 │

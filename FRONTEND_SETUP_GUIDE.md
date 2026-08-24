@@ -35,7 +35,7 @@ ng version
 
 Navigate to the project directory:
 ```bash
-cd /Users/seanxaviernieva/Documents/GitHub/demo-bpi
+cd /Users/seanxaviernieva/Documents/GitHub/demo-banking-java
 ```
 
 Create the Angular project:
